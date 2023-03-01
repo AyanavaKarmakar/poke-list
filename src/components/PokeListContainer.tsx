@@ -30,6 +30,7 @@ export const PokeListContainer = () => {
         setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
         setError({
           isError: true,
           message: "An error occurred while fetching the list of pokemons",
@@ -80,7 +81,7 @@ export const PokeListContainer = () => {
         })}
       </div>
 
-      {error.isError && <p>{error.message}</p>}
+      {!loading && error.isError && <p>{error.message}</p>}
 
       {loading && <p>Loading...</p>}
 
