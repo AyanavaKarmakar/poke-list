@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import { PokeListContainer } from "~/components";
 
 const Home: NextPage = () => {
   return (
@@ -10,7 +11,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>PokeList</main>
+      <main>
+        <h1>PokeList</h1>
+
+        <PokeListContainer />
+      </main>
     </>
   );
 };
