@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { PokeListSchema, type TPokeList } from "~/types";
+import { useRouter } from "next/router";
 
 export const PokeListContainer = () => {
   const [pokemons, setPokemons] = useState<TPokeList["results"]>([]);
@@ -10,6 +11,8 @@ export const PokeListContainer = () => {
     isError: false,
     message: "",
   });
+
+  const { push } = useRouter();
 
   useEffect(() => {
     /**
@@ -49,14 +52,6 @@ export const PokeListContainer = () => {
     setOffset((prevOffset) => prevOffset - 20);
   };
 
-  // const handlePokemonClick = (url) => {
-  //   fetch(url)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data); // replace with code to display details
-  //     });
-  // };
-
   return (
     <div>
       <h1>Pokemon List</h1>
@@ -67,7 +62,12 @@ export const PokeListContainer = () => {
           const imageKey = url.split("/")[6] as string;
 
           return (
-            <div key={name}>
+            <div
+              key={name}
+              onClick={() => {
+                void push(`/pokemon/${imageKey}`);
+              }}
+            >
               <Image
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${imageKey}.png`}
                 alt={name}
