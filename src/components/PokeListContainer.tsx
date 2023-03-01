@@ -56,31 +56,34 @@ export const PokeListContainer = () => {
   return (
     <div className="m-5 rounded-md">
       <div className="flex flex-row flex-wrap">
-        {pokemons.map((pokemon) => {
-          const { name, url } = pokemon;
-          const imageKey = url.split("/")[6] as string;
+        {!loading &&
+          !error.isError &&
+          pokemons &&
+          pokemons.map((pokemon) => {
+            const { name, url } = pokemon;
+            const imageKey = url.split("/")[6] as string;
 
-          return (
-            <div
-              className="mx-auto my-5 cursor-pointer rounded-3xl border-2 border-solid border-black bg-slate-800 p-3"
-              title={`Click to see details of ${name}`}
-              key={name}
-              onClick={() => {
-                void push(`/pokemon/${imageKey}`);
-              }}
-            >
-              <Image
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${imageKey}.png`}
-                alt={name}
-                width={300}
-                height={300}
-              />
-              <h2 className="text-center text-2xl font-semibold text-white">
-                {name.charAt(0).toUpperCase() + name.slice(1)}
-              </h2>
-            </div>
-          );
-        })}
+            return (
+              <div
+                className="mx-auto my-5 cursor-pointer rounded-3xl border-2 border-solid border-black bg-slate-800 p-3"
+                title={`Click to see details of ${name}`}
+                key={name}
+                onClick={() => {
+                  void push(`/pokemon/${imageKey}`);
+                }}
+              >
+                <Image
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${imageKey}.png`}
+                  alt={name}
+                  width={300}
+                  height={300}
+                />
+                <h2 className="text-center text-2xl font-semibold text-white">
+                  {name.charAt(0).toUpperCase() + name.slice(1)}
+                </h2>
+              </div>
+            );
+          })}
       </div>
 
       {!loading && error.isError && (
