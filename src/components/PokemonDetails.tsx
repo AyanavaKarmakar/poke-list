@@ -71,7 +71,9 @@ export const PokemonDetails: FC<Props> = (props) => {
         </div>
       )}
 
-      <button onClick={() => void push("/")}>Go back</button>
+      <button title="Go back to PokeList" onClick={() => void push("/")}>
+        Go back
+      </button>
 
       {loading && <p>Loading...</p>}
 

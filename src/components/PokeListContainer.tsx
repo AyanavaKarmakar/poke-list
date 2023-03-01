@@ -64,6 +64,7 @@ export const PokeListContainer = () => {
 
           return (
             <div
+              title={`Click to see details of ${name}`}
               key={name}
               onClick={() => {
                 void push(`/pokemon/${imageKey}`);
@@ -85,9 +86,17 @@ export const PokeListContainer = () => {
 
       {loading && <p>Loading...</p>}
 
-      {!loading && <button onClick={handleLoadMore}>Load More</button>}
+      {!loading && (
+        <button title="Load more Pokemons" onClick={handleLoadMore}>
+          Load More
+        </button>
+      )}
 
-      {!loading && offset > 0 && <button onClick={goBack}>Go Back</button>}
+      {!loading && offset > 0 && (
+        <button title="Load previous Pokemons" onClick={goBack}>
+          Go Back
+        </button>
+      )}
     </div>
   );
 };
