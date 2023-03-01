@@ -11,8 +11,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>PokeList</h1>
+      <main className="flex min-h-screen flex-col justify-center">
+        <h1 className="my-5 text-center text-6xl font-bold">PokeList</h1>
 
         <PokeListContainer />
       </main>

@@ -54,16 +54,15 @@ export const PokeListContainer = () => {
   };
 
   return (
-    <div>
-      <h1>Pokemon List</h1>
-
-      <div>
+    <div className="m-5 rounded-md">
+      <div className="flex flex-row flex-wrap">
         {pokemons.map((pokemon) => {
           const { name, url } = pokemon;
           const imageKey = url.split("/")[6] as string;
 
           return (
             <div
+              className="mx-auto my-5 cursor-pointer rounded-3xl border-2 border-solid border-black bg-slate-800 p-3"
               title={`Click to see details of ${name}`}
               key={name}
               onClick={() => {
@@ -73,30 +72,50 @@ export const PokeListContainer = () => {
               <Image
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${imageKey}.png`}
                 alt={name}
-                width={100}
-                height={100}
+                width={300}
+                height={300}
               />
-              <h2>{name}</h2>
+              <h2 className="text-center text-2xl font-semibold text-white">
+                {name.charAt(0).toUpperCase() + name.slice(1)}
+              </h2>
             </div>
           );
         })}
       </div>
 
-      {!loading && error.isError && <p>{error.message}</p>}
-
-      {loading && <p>Loading...</p>}
-
-      {!loading && (
-        <button title="Load more Pokemons" onClick={handleLoadMore}>
-          Load More
-        </button>
+      {!loading && error.isError && (
+        <p className="text-center text-3xl font-semibold text-red-600">
+          {error.message}
+        </p>
       )}
 
-      {!loading && offset > 0 && (
-        <button title="Load previous Pokemons" onClick={goBack}>
-          Go Back
-        </button>
+      {loading && (
+        <p className="text-center text-3xl font-semibold text-black">
+          Loading...
+        </p>
       )}
+
+      <div className="mx-5 flex flex-row items-center">
+        {!loading && (
+          <button
+            className="my-5 mx-3 rounded-md border-2 border-solid border-black bg-green-600 p-3 text-lg text-white"
+            title="Load more Pokemons"
+            onClick={handleLoadMore}
+          >
+            Load More
+          </button>
+        )}
+
+        {!loading && offset > 0 && (
+          <button
+            className="my-5 mx-3 rounded-md border-2 border-solid border-black bg-blue-600 p-3 text-lg text-white"
+            title="Load previous Pokemons"
+            onClick={goBack}
+          >
+            Go Back
+          </button>
+        )}
+      </div>
     </div>
   );
 };
