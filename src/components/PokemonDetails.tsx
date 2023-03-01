@@ -1,6 +1,7 @@
 import { type FC, useState, useEffect } from "react";
 import { PokeDetailSchema, type TPokeDetail } from "~/types";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 interface Props {
   id: string;
@@ -14,6 +15,8 @@ export const PokemonDetails: FC<Props> = (props) => {
     message: "",
   });
   const [details, setDetails] = useState<TPokeDetail>();
+
+  const { push } = useRouter();
 
   useEffect(() => {
     /**
@@ -67,6 +70,8 @@ export const PokemonDetails: FC<Props> = (props) => {
           <h2>Base XP: {details.base_experience}</h2>
         </div>
       )}
+
+      <button onClick={() => void push("/")}>Go back</button>
 
       {loading && <p>Loading...</p>}
 
