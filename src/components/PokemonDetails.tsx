@@ -50,34 +50,60 @@ export const PokemonDetails: FC<Props> = (props) => {
   }, [id]);
 
   return (
-    <div>
-      <h1>PokeDetails</h1>
-
+    <div className="flex flex-col items-center justify-center gap-3">
       {!loading && !error.isError && details && (
-        <div>
-          <h2>Name: {details.name}</h2>
+        <div className="rounded-md bg-slate-800 p-12 text-white">
+          <h2 className="text-center text-3xl">
+            <span className="font-semibold">{"Name: "}</span>
+            {details.name.charAt(0).toUpperCase() + details.name.slice(1)}
+          </h2>
 
           <Image
+            className="p-3"
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
             alt={details.name}
             width={200}
             height={200}
           />
 
-          <h2>Height: {details.height}</h2>
-          <h2>Weight: {details.weight}</h2>
+          <div className="flex flex-col items-center text-center text-3xl">
+            <h2>
+              <span className="font-semibold">{"Height: "}</span>
+              {details.height}
+            </h2>
 
-          <h2>Base XP: {details.base_experience}</h2>
+            <h2>
+              <span className="font-semibold">{"Weight: "}</span>
+              {details.weight}
+            </h2>
+
+            <h2>
+              <span className="font-semibold">{"Base XP: "}</span>
+              {details.base_experience}
+            </h2>
+          </div>
         </div>
       )}
 
-      <button title="Go back to PokeList" onClick={() => void push("/")}>
+      <button
+        className="my-5 mx-3 rounded-md border-2 border-solid border-black bg-blue-600 p-3 text-lg text-white"
+        title="Go back to PokeList"
+        onClick={() => void push("/")}
+      >
         Go back
       </button>
 
-      {loading && <p>Loading...</p>}
+      {!loading && error.isError && (
+        <p className="text-center text-3xl font-semibold text-red-600">
+          {error.message}
+        </p>
+      )}
 
-      {!loading && error.isError && <p>{error.message}</p>}
+      {loading && (
+        <p className="text-center text-3xl font-semibold text-black">
+          Loading...
+        </p>
+      )}
     </div>
   );
 };

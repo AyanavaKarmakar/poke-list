@@ -15,8 +15,8 @@ const PokeId: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>Pokemon Details</h1>
+      <main className="flex min-h-screen flex-col justify-center">
+        <h1 className="my-5 text-center text-6xl font-bold">PokeDetails</h1>
 
         <PokemonDetails id={pokeId as string} />
       </main>
